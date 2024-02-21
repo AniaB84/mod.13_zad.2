@@ -48,7 +48,7 @@ if __name__ == "__main__":
    -- zadanie table
    CREATE TABLE IF NOT EXISTS tasks (
       id integer PRIMARY KEY,
-      project_id integer NOT NULL,
+      projekt_id integer NOT NULL,
       station VARCHAR(15) NOT NULL,
       date text NOT NULL,
       precip text NOT NULL,

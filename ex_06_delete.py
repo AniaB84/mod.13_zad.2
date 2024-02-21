@@ -49,6 +49,6 @@ def delete_all(conn, table):
 if __name__ == "__main__":
    conn = create_connection("database.db")
    delete_where(conn, "tasks", id=1)
-   delete_all(conn, "projects")
+   delete_all(conn, "tasks")
 
-   
+   conn.close()

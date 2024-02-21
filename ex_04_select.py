@@ -1,3 +1,16 @@
+import sqlite3
+from sqlite3 import Error
+
+def create_connection(db_file):
+   """ create a database connection to a SQLite database """
+   conn = None
+   try:
+       conn = sqlite3.connect(db_file)
+       print(f"Connected to {db_file}, sqlite version: {sqlite3.version}")
+   except Error as e:
+       print(e)
+   return conn
+
 def select_task_by_status(conn, status):
    """
    Query tasks by priority
@@ -42,4 +55,9 @@ def select_where(conn, table, **query):
    rows = cur.fetchall()
    return rows
 
+
+if __name__ == "__main__":
+   conn = create_connection("database.db")
    conn.execute("SELECT * FROM tasks LIMIT 5").fetchall()
+
+print(conn.execute("SELECT * FROM tasks LIMIT 5").fetchall())

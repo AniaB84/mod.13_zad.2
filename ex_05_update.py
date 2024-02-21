@@ -17,7 +17,7 @@ def create_connection(db_file):
 
 def update(conn, table, id, **kwargs):
    """
-   update status, begin_date, and end date of a task
+   update station, tobs of a task
    :param conn:
    :param table: table name
    :param id: row id
@@ -41,7 +41,7 @@ def update(conn, table, id, **kwargs):
 
 if __name__ == "__main__":
    conn = create_connection("database.db")
-   update(conn, "tasks", 2, status="started")
-   update(conn, "tasks", 2, stat="started")
+   update(conn, "tasks", 1, station="USC00519397")
+   update(conn, "tasks", 1, tobs="65")
    conn.close()
    
