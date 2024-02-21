@@ -41,4 +41,5 @@ def select_where(conn, table, **query):
    cur.execute(f"SELECT * FROM {table} WHERE {q}", values)
    rows = cur.fetchall()
    return rows
-   
+
+   conn.execute("SELECT * FROM tasks LIMIT 5").fetchall()

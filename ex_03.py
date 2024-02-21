@@ -1,4 +1,5 @@
 import sqlite3
+import csv
 
 def create_connection(db_file):
    """ create a database connection to the SQLite database
@@ -36,24 +37,37 @@ def add_task(conn, task):
    :return: task id
    """
    sql = '''INSERT INTO tasks(projekt_id, station, date, precip, tobs)
-             VALUES(?,?,?,?,?)'''
+            VALUES(?,?,?,?,?)'''
    cur = conn.cursor()
    cur.execute(sql, task)
    conn.commit()
    return cur.lastrowid
 
 if __name__ == "__main__":
-   project = ("")
-
+  # Connect to the database
    conn = create_connection("database.db")
-   pr_id = add_project(conn, project)
+   
+   # Insert data from clean_stations.csv into the database
+   with open('clean_stations.csv', 'r') as file:
+       reader = csv.reader(file)
+       next(reader)  # Skip header
+       for row in reader:
+           project = (row[0], row[1], row[2], row[3], row[4], row[5], row[6])
+           add_project(conn, project)
+   pr_id = add_project(conn, project)       
 
-   task = (
-       pr_id,
-    ""
-   )
-
-   task_id = add_task(conn, task)
-
-   print(pr_id, task_id)
+   # Insert data from clean_measure.csv into the database
+   with open('clean_measure.csv', 'r') as file:
+       reader = csv.reader(file)
+       next(reader)  # Skip header
+       for row in reader:
+           task = (pr_id, row[0], row[1], row[2], row[3])
+           add_task(conn, task)
+   
+  
+   # Commit changes and close connection
    conn.commit()
+   
+
+
+   

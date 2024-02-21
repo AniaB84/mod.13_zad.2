@@ -48,7 +48,7 @@ if __name__ == "__main__":
    -- zadanie table
    CREATE TABLE IF NOT EXISTS tasks (
       id integer PRIMARY KEY,
-      projekt_id integer NOT NULL,
+      project_id integer NOT NULL,
       station VARCHAR(15) NOT NULL,
       date text NOT NULL,
       precip text NOT NULL,
@@ -63,6 +63,8 @@ if __name__ == "__main__":
    if conn is not None:
        execute_sql(conn, create_projects_sql)
        execute_sql(conn, create_tasks_sql)
-       conn.close()
+
+conn.close()
+       
 
    
