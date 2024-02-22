@@ -59,5 +59,6 @@ def select_where(conn, table, **query):
 if __name__ == "__main__":
    conn = create_connection("database.db")
    conn.execute("SELECT * FROM tasks LIMIT 5").fetchall()
-
+   conn.close()
 print(conn.execute("SELECT * FROM tasks LIMIT 5").fetchall())
+   
